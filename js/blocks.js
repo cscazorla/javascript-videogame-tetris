@@ -51,7 +51,15 @@ const blocks = [
     ],
 ]
 
-const colors = ['#00ab55', '#e3dd36', '#4a4ed9', '#db9948', '#d60000', '#f683fc', '#75177a']
+const colors = [
+    '#00ab55',
+    '#e3dd36',
+    '#4a4ed9',
+    '#db9948',
+    '#d60000',
+    '#f683fc',
+    '#75177a',
+]
 
 let Block = {
     game: null,
@@ -59,6 +67,7 @@ let Block = {
     y: null,
     type: null,
     orientation: null,
+    show_projection: true,
     next_block_type: Math.floor(Math.random() * 7),
     get: function (block, orientation) {
         return blocks[block][orientation]
@@ -99,6 +108,8 @@ let Block = {
         }
     },
     drawBlockInBoard: function (ctx) {
+        if (this.show_projection) this.drawBlockProjectionInBoard(ctx)
+
         for (let j = 0; j < 3; j++) {
             for (let i = 0; i < 3; i++) {
                 const index = get1DIndexFrom2DCoordinates(i, j, 3)
@@ -136,7 +147,38 @@ let Block = {
             )
         }
     },
-    // To Do: Use this.getWorldCoordinatesForBlockPieces()
+    drawBlockProjectionInBoard: function (ctx) {
+        // We look for the next obstacle in the vertical line
+        let row = null
+        for (let j = 0; j < constants.ROWS; j++) {
+            if (this.isCollision(this.x, this.y + j, this.orientation)) {
+                row = this.y + j
+                
+                break;
+            }
+        }
+
+        for (let j = 0; j < 3; j++) {
+            for (let i = 0; i < 3; i++) {
+                const index = get1DIndexFrom2DCoordinates(i, j, 3)
+                const value = blocks[this.type][this.orientation][index]
+
+                if (value) {
+                    ctx.fillStyle = pSBC(0.7, colors[this.type])
+                    ctx.fillRect(
+                        (this.x + i - 1) * constants.CELL_WIDTH,
+                        (row + j - 2) * constants.CELL_HEIGHT,
+                        constants.CELL_WIDTH,
+                        constants.CELL_HEIGHT
+                    )
+                }
+            }
+        }
+
+        
+                
+    },
+
     isCollision: function (x, y, orientation) {
         let collision = false
 
@@ -194,7 +236,7 @@ let Block = {
             this.game.map[index] = this.type + 2
         }
     },
-    getStoneColor: function(index) {
+    getStoneColor: function (index) {
         let color = colors[index - 2]
         return pSBC(-0.5, color)
     },
