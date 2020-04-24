@@ -87,7 +87,7 @@ export default class Game {
             let all_slots_filled = true
             for (let x = 0; x < constants.COLS && all_slots_filled; x++) {
                 const index = get1DIndexFrom2DCoordinates(x, y, constants.COLS)
-                if (this.map[index] != constants.MAP_ROCK)
+                if (this.map[index] == constants.MAP_AIR)
                     all_slots_filled = false
             }
             if (all_slots_filled) {
@@ -106,8 +106,16 @@ export default class Game {
                 const index = get1DIndexFrom2DCoordinates(x, y, constants.COLS)
                 const value = this.map[index]
 
-                if (value == constants.MAP_ROCK) {
-                    this.board_ctx.fillStyle = 'grey'
+                // We only draw Rocks and Stoned Blocks
+                if (value > 0) {
+                    let color = null
+                    if(value == constants.MAP_ROCK) {
+                        color = 'grey'
+                    } else {
+                        // color = pSBC(-0.5, Block.getStoneColor(value))
+                        color = Block.getStoneColor(value)
+                    }
+                    this.board_ctx.fillStyle = color
                     this.board_ctx.fillRect(
                         x * constants.CELL_WIDTH,
                         y * constants.CELL_HEIGHT,

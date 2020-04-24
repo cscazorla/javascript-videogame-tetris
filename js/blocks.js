@@ -4,6 +4,7 @@ import {
     get2DCoordinatesFrom1DIndex,
     get1DIndexFrom2DCoordinates,
 } from './helpers.js'
+import pSBC from './pSBC.js'
 
 const blocks = [
     [
@@ -50,7 +51,7 @@ const blocks = [
     ],
 ]
 
-const colors = ['green', 'yellow', 'blue', 'orange', 'red', 'pink', 'purple']
+const colors = ['#00ab55', '#e3dd36', '#4a4ed9', '#db9948', '#d60000', '#f683fc', '#75177a']
 
 let Block = {
     game: null,
@@ -82,10 +83,11 @@ let Block = {
             this.y++
         }
     },
-    shouldTurnIntoRock: function() {
+    shouldTurnIntoRock: function () {
         // If is touching any rock, we turn it into rock
         if (this.isCollision(this.x, this.y + 1, this.orientation)) {
-            this.touchedRock()
+            this.turnIntoStone()
+            this.spawnsBlock()
         }
     },
     rotate: function () {
@@ -181,10 +183,6 @@ let Block = {
     getWorldCoordinates: function (i, j) {
         return { x: this.x + i - 1, y: this.y + j - 1 }
     },
-    touchedRock: function () {
-        this.turnIntoStone()
-        this.spawnsBlock()
-    },
     turnIntoStone: function () {
         let coordinates = this.getWorldCoordinatesForBlockPieces()
         for (let points of coordinates) {
@@ -193,8 +191,12 @@ let Block = {
                 points.y,
                 constants.COLS
             )
-            this.game.map[index] = constants.MAP_ROCK
+            this.game.map[index] = this.type + 2
         }
+    },
+    getStoneColor: function(index) {
+        let color = colors[index - 2]
+        return pSBC(-0.5, color)
     },
     spawnsBlock: function () {
         this.x = 4
@@ -206,7 +208,6 @@ let Block = {
 
         this.drawNextBlock()
     },
-
     drawNextBlock: function () {
         // Clean up
         this.game.next_block_ctx.clearRect(
