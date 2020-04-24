@@ -5,3 +5,7 @@ Simple implementation of the Tetris game in pure Javascript
 * SFX when doing a new line
 * Polish UI
 * Persit Best Score in localStorage
+* Blocks should go faster little by little
+* Welcome screen to choose difficulty
+    * Hard - Blocks go faster
+    * Easy - Grid lines
