@@ -63,11 +63,6 @@ let Block = {
         return blocks[block][orientation]
     },
     move: function (direction) {
-        // If is touching any rock, we turn it into rock
-        if (this.isCollision(this.x, this.y + 1, this.orientation)) {
-            this.touchedRock()
-        }
-
         if (
             direction == constants.BLOCK_MOVE_LEFT &&
             !this.isCollision(this.x - 1, this.y, this.orientation)
@@ -85,6 +80,12 @@ let Block = {
             !this.isCollision(this.x, this.y + 1, this.orientation)
         ) {
             this.y++
+        }
+    },
+    shouldTurnIntoRock: function() {
+        // If is touching any rock, we turn it into rock
+        if (this.isCollision(this.x, this.y + 1, this.orientation)) {
+            this.touchedRock()
         }
     },
     rotate: function () {
@@ -208,15 +209,21 @@ let Block = {
 
     drawNextBlock: function () {
         // Clean up
-        this.game.next_block_ctx.clearRect(0, 0, this.game.next_block_canvas.width, this.game.next_block_canvas.height)
-        
+        this.game.next_block_ctx.clearRect(
+            0,
+            0,
+            this.game.next_block_canvas.width,
+            this.game.next_block_canvas.height
+        )
+
         for (let j = 0; j < 3; j++) {
             for (let i = 0; i < 3; i++) {
                 const index = get1DIndexFrom2DCoordinates(i, j, 3)
                 const value = blocks[this.next_block_type][0][index]
 
                 if (value) {
-                    this.game.next_block_ctx.fillStyle = colors[this.next_block_type]
+                    this.game.next_block_ctx.fillStyle =
+                        colors[this.next_block_type]
                     this.game.next_block_ctx.fillRect(
                         i * constants.CELL_WIDTH,
                         j * constants.CELL_HEIGHT,

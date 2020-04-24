@@ -57,10 +57,11 @@ export default class Game {
             } else {
                 this.gravity_counter = 0
 
-                this.isGameOver()
+                Block.shouldTurnIntoRock()
 
-                // Any new line?
                 this.checkNewLine()
+
+                this.isGameOver()
 
                 // The block should fall
                 Block.move(constants.BLOCK_MOVE_DOWN)
