@@ -74,19 +74,19 @@ let Block = {
     },
     move: function (direction) {
         if (
-            direction == constants.BLOCK_MOVE_LEFT &&
+            direction == 'left' &&
             !this.isCollision(this.x - 1, this.y, this.orientation)
         ) {
             this.x--
         }
         if (
-            direction == constants.BLOCK_MOVE_RIGHT &&
+            direction == 'right' &&
             !this.isCollision(this.x + 1, this.y, this.orientation)
         ) {
             this.x++
         }
         if (
-            direction == constants.BLOCK_MOVE_DOWN &&
+            direction == 'down' &&
             !this.isCollision(this.x, this.y + 1, this.orientation)
         ) {
             this.y++
@@ -153,8 +153,8 @@ let Block = {
         for (let j = 0; j < constants.ROWS; j++) {
             if (this.isCollision(this.x, this.y + j, this.orientation)) {
                 row = this.y + j
-                
-                break;
+
+                break
             }
         }
 
@@ -174,9 +174,6 @@ let Block = {
                 }
             }
         }
-
-        
-                
     },
 
     isCollision: function (x, y, orientation) {

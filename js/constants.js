@@ -13,7 +13,3 @@ export const GAME_HEIGHT = CELL_HEIGHT * ROWS
 export const MAP_AIR = 0
 export const MAP_ROCK = 1
 export const MAP_BLOCK = -1
-
-export const BLOCK_MOVE_LEFT = 0
-export const BLOCK_MOVE_RIGHT = 1
-export const BLOCK_MOVE_DOWN = 2

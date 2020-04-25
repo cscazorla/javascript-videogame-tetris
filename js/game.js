@@ -1,4 +1,5 @@
 import * as constants from './constants.js'
+import Input from './input.js'
 import Block from './blocks.js'
 import {
     debug,
@@ -17,29 +18,12 @@ export default class Game {
         this.map = this.clearMap()
         this.gravity_max_counter = 50
         this.gravity_counter = 0
-        
+
         this.pause = false
         this.gameover = false
 
         this.score = 0
         this.scoreElem = document.querySelector('#score')
-
-        window.addEventListener(
-            'keydown',
-            function (event) {
-                if (event.keyCode == 39) {
-                    Block.move(constants.BLOCK_MOVE_RIGHT)
-                } else if (event.keyCode == 37) {
-                    Block.move(constants.BLOCK_MOVE_LEFT)
-                } else if (event.keyCode == 38) {
-                    Block.rotate()
-                } else if (event.keyCode == 40) {
-                    Block.move(constants.BLOCK_MOVE_DOWN)
-                } else if (event.keyCode == 80) {
-                    this.pause = !this.pause
-                }
-            }.bind(this)
-        )
 
         Block.game = this
         Block.spawnsBlock()
@@ -51,6 +35,7 @@ export default class Game {
         window.requestAnimationFrame(this.update.bind(this))
 
         if (!this.pause && !this.gameover) {
+            Input.movement()
             // Delayed game loop
             if (this.gravity_counter < this.gravity_max_counter) {
                 this.gravity_counter++
@@ -64,7 +49,7 @@ export default class Game {
                 this.isGameOver()
 
                 // The block should fall
-                Block.move(constants.BLOCK_MOVE_DOWN)
+                Block.move('down')
             }
         }
 
@@ -98,7 +83,12 @@ export default class Game {
 
     render = function () {
         // Clean up
-        this.board_ctx.clearRect(0, 0, this.board_canvas.width, this.board_canvas.height)
+        this.board_ctx.clearRect(
+            0,
+            0,
+            this.board_canvas.width,
+            this.board_canvas.height
+        )
 
         // Draw map
         for (let x = 0; x < constants.COLS; x++) {
@@ -109,7 +99,7 @@ export default class Game {
                 // We only draw Rocks and Stoned Blocks
                 if (value > 0) {
                     let color = null
-                    if(value == constants.MAP_ROCK) {
+                    if (value == constants.MAP_ROCK) {
                         color = '#363946'
                     } else {
                         // color = pSBC(-0.5, Block.getStoneColor(value))
