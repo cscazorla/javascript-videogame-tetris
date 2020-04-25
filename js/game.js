@@ -110,7 +110,7 @@ export default class Game {
                 if (value > 0) {
                     let color = null
                     if(value == constants.MAP_ROCK) {
-                        color = 'grey'
+                        color = '#363946'
                     } else {
                         // color = pSBC(-0.5, Block.getStoneColor(value))
                         color = Block.getStoneColor(value)
@@ -132,7 +132,7 @@ export default class Game {
         // Pause?
         if (this.pause) {
             this.board_ctx.fillStyle = 'blue'
-            this.board_ctx.font = '24px bold monospace'
+            this.board_ctx.font = '40px Arial'
             this.board_ctx.textBaseline = 'middle'
             this.board_ctx.textAlign = 'center'
             this.board_ctx.fillText(
@@ -144,8 +144,8 @@ export default class Game {
 
         // Game Over
         if (this.gameover) {
-            this.board_ctx.fillStyle = 'blue'
-            this.board_ctx.font = '24px bold monospace'
+            this.board_ctx.fillStyle = 'red'
+            this.board_ctx.font = '40px Arial'
             this.board_ctx.textBaseline = 'middle'
             this.board_ctx.textAlign = 'center'
             this.board_ctx.fillText(

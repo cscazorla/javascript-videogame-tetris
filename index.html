@@ -2,6 +2,7 @@
     <head>
         <title>Tetris</title>
         <meta charset="utf-8" />
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
         <style>
             html,
             body {
@@ -9,27 +10,51 @@
                 height: 100%;
                 margin: 0;
                 overflow: hidden;
-                background: #eee;
+                background: #819595;
+            }
+            #wrapper {
+                width: 600px;
+                height: 800px;
+                margin: 40px auto;
+                text-align: center;
+                font-size: 12;
+                font-family: 'Press Start 2P', cursive;
+            }
+            #board {
+                float: left;
+                position: relative;
+                width:320px;
             }
             #main_canvas {
-                background: white;
+                background: #f5f8ea;
                 border: 0;
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                margin: auto;
+                position: relative;
             }
 
-            #next_block_canvas {border: 2px solid #000}
+            #side_bar {
+                position: relative;
+                float: right;
+            }
+
+            #next_block_canvas {
+                border: 2px solid #363946;
+                background: #f5f8ea;
+            }
         </style>
     </head>
 
     <body>
-        <h1 id="score">Score: 0</h1>
-        <canvas id="main_canvas"></canvas>
-        <canvas id="next_block_canvas"></canvas>
+        <div id="wrapper">
+            <p>Use LEFT, RIGHT, UP and DOWN arrow keys to play.</p>
+            <div id="board">
+                <h1 id="score">Score: 0</h1>
+                <canvas id="main_canvas"></canvas>
+            </div>
+            <div id="side_bar">
+                <h1>Next block</h1>
+                <canvas id="next_block_canvas"></canvas>
+            </div>
+        </div>
     </body>
     <script type="module" src="js/main.js"></script>
 </html>
