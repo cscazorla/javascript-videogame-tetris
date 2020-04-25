@@ -24,7 +24,6 @@ export default class Game {
         this.gameover = false
 
         this.score = 0
-        this.scoreElem = DOM.get('score')
 
         Block.game = this
         Block.spawnsBlock()
@@ -141,7 +140,9 @@ export default class Game {
         }
 
         // UI
-        DOM.set(this.scoreElem, 'Score: ' + this.score)
+        DOM.set(DOM.get('score'), 'Score: ' + this.score)
+        if(localStorage.getItem('cscazorla_tetris_best_score'))
+        DOM.set(DOM.get('best_score'), 'Best:' + localStorage.getItem('cscazorla_tetris_best_score'))
     }
 
     clearMap = function () {
@@ -187,5 +188,7 @@ export default class Game {
 
     addScore = function () {
         this.score += 10
+        if(this.score > localStorage.getItem('cscazorla_tetris_best_score'))
+            localStorage.setItem('cscazorla_tetris_best_score', this.score)
     }
 }

@@ -33,12 +33,10 @@
                 border: 0;
                 position: relative;
             }
-
             #side_bar {
                 position: relative;
                 float: right;
             }
-
             #next_block_canvas {
                 border: 2px solid #363946;
                 background: #f5f8ea;
@@ -47,7 +45,7 @@
             #pause {
                 width: 800px;
                 height: 12px;
-                background: #E07A5F;
+                background: #e07a5f;
                 position: absolute;
                 top: 0;
                 bottom: 0;
@@ -58,7 +56,7 @@
                 opacity: 0.9;
                 text-align: center;
                 padding: 30px 0;
-                color: #FFF;
+                color: #fff;
                 font-size: 12;
                 font-family: 'Press Start 2P', cursive;
                 border: 3px solid #363946;
@@ -74,12 +72,16 @@
                 Pause.
             </p>
             <div id="board">
-                <h1 id="score">Score: 0</h1>
                 <canvas id="main_canvas"></canvas>
             </div>
             <div id="side_bar">
                 <h1>Next block</h1>
                 <canvas id="next_block_canvas"></canvas>
+                <br />
+                <br />
+                <h1 id="score">Score: 0</h1>
+                <br />
+                <h1 id="best_score"></h1>
             </div>
         </div>
     </body>
