@@ -3,6 +3,8 @@ Simple implementation of the Tetris game in pure Javascript
 
 ![Screenshot of the game](img/screenshot.png)
 
+You can play this at https://tetris.cscazorla.es
+
 # To Do
 * Persit Best Score in localStorage
 * SFX when doing a new line
