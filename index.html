@@ -2,7 +2,10 @@
     <head>
         <title>Tetris</title>
         <meta charset="utf-8" />
-        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+            rel="stylesheet"
+        />
         <style>
             html,
             body {
@@ -23,7 +26,7 @@
             #board {
                 float: left;
                 position: relative;
-                width:320px;
+                width: 320px;
             }
             #main_canvas {
                 background: #f5f8ea;
@@ -40,12 +43,36 @@
                 border: 2px solid #363946;
                 background: #f5f8ea;
             }
+
+            #pause {
+                width: 800px;
+                height: 12px;
+                background: #E07A5F;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 10;
+                margin: auto;
+                opacity: 0.9;
+                text-align: center;
+                padding: 30px 0;
+                color: #FFF;
+                font-size: 12;
+                font-family: 'Press Start 2P', cursive;
+                border: 3px solid #363946;
+            }
         </style>
     </head>
 
     <body>
+        <div id="pause">PAUSE</div>
         <div id="wrapper">
-            <p>Use LEFT, RIGHT, UP and DOWN arrow keys to play.</p>
+            <p>
+                Use LEFT, RIGHT, UP and DOWN arrow keys to play. Press P to
+                Pause.
+            </p>
             <div id="board">
                 <h1 id="score">Score: 0</h1>
                 <canvas id="main_canvas"></canvas>

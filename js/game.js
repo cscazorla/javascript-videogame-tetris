@@ -1,6 +1,7 @@
 import * as constants from './constants.js'
 import Input from './input.js'
 import Block from './blocks.js'
+import DOM from './dom.js'
 import {
     debug,
     get2DCoordinatesFrom1DIndex,
@@ -23,7 +24,7 @@ export default class Game {
         this.gameover = false
 
         this.score = 0
-        this.scoreElem = document.querySelector('#score')
+        this.scoreElem = DOM.get('score')
 
         Block.game = this
         Block.spawnsBlock()
@@ -121,15 +122,9 @@ export default class Game {
 
         // Pause?
         if (this.pause) {
-            this.board_ctx.fillStyle = 'blue'
-            this.board_ctx.font = '40px Arial'
-            this.board_ctx.textBaseline = 'middle'
-            this.board_ctx.textAlign = 'center'
-            this.board_ctx.fillText(
-                'PAUSE',
-                constants.GAME_WIDTH / 2,
-                constants.GAME_HEIGHT / 2
-            )
+            DOM.show(DOM.get('pause'))
+        } else {
+            DOM.hide(DOM.get('pause'))
         }
 
         // Game Over
@@ -146,7 +141,7 @@ export default class Game {
         }
 
         // UI
-        this.scoreElem.textContent = 'Score: ' + this.score
+        DOM.set(this.scoreElem, 'Score: ' + this.score)
     }
 
     clearMap = function () {
